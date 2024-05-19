@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!--
+    #           ,  . .,  °                    ,.,   '            ,.-·.              ,. –  - .,  °              , ·. ,.-·~·.,   ‘    
+#     ;'´    ,   ., _';\'                ;´   '· .,          /    ;'\'           ';_,.., _     '`. '         /  ·'´,.-·-.,   `,'‚    
+#     \:´¨¯:;'   `;::'\:'\             .´  .-,    ';\       ;    ;:::\           \:::::::::::';   ,'\       /  .'´\:::::::'\   '\ °  
+#       \::::;   ,'::_'\;'            /   /:\:';   ;:'\'    ';    ;::::;'           '\_;::;:,·´  .·´::\‘  ,·'  ,'::::\:;:-·-:';  ';\‚  
+#           ,'  ,'::;'  ‘            ,'  ,'::::'\';  ;::';     ;   ;::::;                , '´ .·´:::::;'   ;.   ';:::;´       ,'  ,':'\‚ 
+#           ;  ;:::;  °        ,.-·'  '·~^*'´¨,  ';::;    ';  ;'::::;               .´  .'::::::;·´'     ';   ;::;       ,'´ .'´\::';‚
+#           ;  ;::;'  ‘         ':,  ,·:²*´¨¯'`;  ;::';    ;  ';:::';            .·´ ,·´:::::;·´         ';   ':;:   ,.·´,.·´::::\;'°
+#           ;  ;::;'‚           ,'  / \::::::::';  ;::';    ';  ;::::;'        ,·´  .´;::–·~^*'´';\‚      \·,   `*´,.·'´::::::;·´   
+#           ',.'\::;'‚          ,' ,'::::\·²*'´¨¯':,'\:;      \*´\:::;‘        '.,_ ,. -·~:*'´¨¯:\:\ °    \\:¯::\:::::::;:·´      
+#            \::\:;'‚          \`¨\:::/          \::\'       '\::\:;'          \:::::::::::::::::::\;       `\:::::\;::·'´  °       
+#             \;:'      ‘       '\::\;'            '\;'  '       `*´‘            \:;_;::-·~^*'´¨¯'             ¯                  
+#               °                `¨'                                                                           ‘                  
+-->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de Location</title>
+    <style>
+		form {
+	margin: 0 auto;
+	width: 600px; 
+	border-radius: 30px;
+	background: linear-gradient(135deg, #b0d8e3, #006076, #97c8bf, #b0d8e3, #006076, #97c8bf);
+	justify-content: center;
+	border: 6px solid #0000ff;
+}
+#zab {
+	margin-left: 20%;
+	justify-content: center;
+	}
+#diag-pad {
+	margin: 0 auto;
+	justify-content: center;
+	width:80%;
+	}
+.popup-content {
+    max-width: 800px; /* Set your desired maximum width */
+    max-height: 600px; /* Set your desired maximum height */
+    overflow: auto; /* Add scrollbars if content exceeds the maximum height */
+    /* Add any other styles you want to apply */
+}
+#canvas {
+	background-color: #ffffff;
+	width: device-width ;
+}
+.form-section {
+    display: none;
+}
+
+.active {
+    display: block;
+}
+#image-container {
+    width: 70%; /* Set the width of the container */
+/*margin: auto; /* Center the container horizontally */
+    position: relative; /* Add position relative to serve as a positioning reference */
+}
+
+#image-overlay {
+    position: relative; /* Ensure relative positioning */
+    width: 100%; /* Make the overlay cover the entire image */
+}
+
+#annotation-canvas {
+    position: absolute; /* Position the canvas absolutely within the overlay */
+    top: 0; /* Align canvas to the top of the overlay */
+    left: 0; /* Align canvas to the left of the overlay */
+    width: 100%; /* Make the canvas fill the entire overlay */
+    height: auto; /* Preserve aspect ratio */
+    z-index: 1; /* Ensure canvas is above the image */
+    border-radius: 10px;
+}
+#erase-button {
+    border-radius: 10px;
+    position: absolute; /* Position the erase button absolutely within the canvas container */
+    bottom: 10px; /* Adjust bottom position as needed */
+    left: 10px; /* Adjust left position as needed */
+    width: 40px; /* Set width */
+    height: 40px; /* Set height */
+    background-color: red; /* Set background color */
+    color: white; /* Set text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Change cursor to pointer */
+    z-index: 2; /* Ensure the button is above the canvas */
+}
+#checkbox-container{
+    border: 3px solid #008cff91;
+    justify-content: center;
+}
+#diagmag {
+    border-radius: 10;
+}
+textarea {
+    margin: auto;
+    color: aqua;
+    background-color: rgb(0, 0, 0);
+    border-color: #0000ff;
+    border-radius: 10cqw;
+
+}
+input {
+    margin: auto;
+    color: aqua;
+    background-color: rgb(0, 0, 0);
+    border-color: #0000ff;
+    border-radius: 10cqw;
+
+}
+label {
+    font-family:'Times New Roman', Times, serif;
+    font-size: 30px;
+    color: #1d0101;
+    margin-left: 10%;
+}
+	</style>
+
+</head>
+<body>
+    
+
+ <form action="#" method="POST">
+	<label for="contract">Contract Number :</label><br>
+	<input type="number" id="contract" name="contract"><br>
+	<div id="zab">
+		<h2>Section Locataire</h2>
+		<label for="nom">Nom :</label><br>
+		<input type="text" id="nom" name="nom" required><br>
+		
+		<label for="prenom">Prénom :</label><br>
+		<input type="text" id="prenom" name="prenom"><br>
+
+		<label for="adresse">Adresse :</label><br>
+		<input type="text" id="adresse" name="adresse"><br>
+
+		
+		<label for="dateNaissance">Date de Naissance :</label><br>
+		<input type="date" id="dateNaissance" name="dateNaissance"><br>
+		
+		<label for="numeroID">Numéro d'ID :</label><br>
+		<input type="text" id="numeroID" name="numeroID"><br>
+		
+		<label for="passport">Passeport :</label><br>
+		<input type="text" id="passport" name="passport"><br>
+		
+		<label for="dateLivraison">Date de Livraison :</label><br>
+		<input type="datetime-local" id="dateLivraison" name="dateLivraison"><br>
+		
+		<label for="nationalite">Nationalité :</label><br>
+		<input type="text" id="nationalite" name="nationalite"><br>
+		
+		<label for="permisConduire">Permis de Conduire :</label><br>
+		<input type="text" id="permisConduire" name="permisConduire"><br>
+		
+		<label for="dateObtentionPermis">Date d'Obtention du Permis :</label><br>
+		<input type="date" id="dateObtentionPermis" name="dateObtentionPermis"><br>
+		
+		<label for="numeroTelephone">Numéro de Téléphone :</label><br>
+		<input type="tel" id="numeroTelephone" name="numeroTelephone"><br>
+		
+		<h2>Section Véhicule</h2>
+		
+		<label for="immatriculation">Immatriculation :</label><br>
+		<input type="text" id="immatriculation" name="immatriculation"><br>
+		
+		<label for="marqueModele">Marque/Modèle :</label><br>
+		<input type="text" id="marqueModele" name="marqueModele"><br>
+		
+		<label for="gaz">Carburant :</label><br>
+		<select id="gaz" name="gaz" >
+			<option value="essence">Essence</option>
+			<option value="gazole" selected>Gazole</option>
+			<option value="électrique">Électrique</option>
+			<option value="hybride">Hybride</option>
+			<option value="hydrogène">Hydrogène</option>
+		</select><br>
+		
+		<label for="carburant">niveau Carburant :</label><br>
+		<input type="range" id="carburant" name="carburant" min="0" max="100" oninput="updateCarburantValue(this.value)"> <!-- Adjust the min and max values as needed -->
+		<span id="carburantValue">0</span>%
+		<script>
+			// Function to update the carburant value dynamically
+			function updateCarburantValue(value) {document.getElementById('carburantValue').textContent = value;}
+		</script>
+				
+		
+		
+		
+		<div id="checkbox-container">
+			<label for="kit">Kit :</label>
+			<input type="checkbox" id="kit" name="kit">
+			
+			<label for="deuxiemePneu">Deuxième Pneu :</label>
+			<input type="checkbox" id="deuxiemePneu" name="deuxiemePneu">
+			
+			<label for="carteGrise">Carte Grise :</label>
+			<input type="checkbox" id="carteGrise" name="carteGrise">
+			
+			<label for="autorisation">Autorisation :</label>
+			<input type="checkbox" id="autorisation" name="autorisation">
+			
+			<label for="vignette">Vignette :</label>
+			<input type="checkbox" id="vignette" name="vignette">
+			
+			<label for="visiteTechnique">Visite Technique :</label>
+			<input type="checkbox" id="visiteTechnique" name="visiteTechnique">
+			
+			<label for="assurance">Assurance :</label>
+			<input type="checkbox" id="assurance" name="assurance">
+		</div>
+
+		<h1>section diagnositique</h1>
+		<center><div id="image-container" width="70%">
+						<div id="image-overlay">
+						<canvas id="annotation-canvas"></canvas>
+						<img src="diagn.png" alt="Diagnosis Image" width="336" id="diagmag">
+						</div>
+						<button id="erase-button">Erase</button>
+
+					<script>
+						document.addEventListener('DOMContentLoaded', function () {
+							const canvas = document.getElementById('annotation-canvas');
+							const ctx = canvas.getContext('2d');
+							canvas.width = canvas.parentElement.clientWidth;
+							canvas.height = canvas.parentElement.clientHeight;
+							ctx.strokeStyle = 'rgba(255, 0, 0, 0.1)';
+							ctx.lineWidth = 15;
+							ctx.lineCap = 'round'
+
+							let isDrawing = false;
+
+							function startDrawing(e) {
+								isDrawing = true;
+								draw(e);
+							}
+
+							function stopDrawing() {
+								isDrawing = false;
+								ctx.beginPath();
+							}
+
+							function draw(e) {
+								if (!isDrawing) return;
+								const x = e.offsetX || e.touches[0].clientX - canvas.getBoundingClientRect().left;
+								const y = e.offsetY || e.touches[0].clientY - canvas.getBoundingClientRect().top;
+								ctx.lineTo(x, y);
+								ctx.stroke();
+								ctx.beginPath();
+								ctx.moveTo(x, y);
+							}
+
+							canvas.addEventListener('mousedown', startDrawing);
+							canvas.addEventListener('touchstart', startDrawing);
+							canvas.addEventListener('mousemove', draw);
+							canvas.addEventListener('touchmove', draw);
+							canvas.addEventListener('mouseup', stopDrawing);
+							canvas.addEventListener('touchend', stopDrawing);
+
+							// Get the existing erase button by its id
+							const eraseButton = document.getElementById('erase-button');
+
+							// Attach event listener to the existing erase button
+							eraseButton.addEventListener('click', (e) => {
+								e.preventDefault(); // Prevent default form submission behavior
+								// Clear the canvas
+								ctx.clearRect(0, 0, canvas.width, canvas.height);
+							});
+						});
+					</script>
+
+				</div></center>
+		
+		<h2>Section Rencontre</h2>
+		
+		<label for="dateHeureDepart">Date et Heure de Départ :</label><br>
+		<input type="datetime-local" id="dateHeureDepart" name="dateHeureDepart"><br>
+		
+		<label for="dateHeureRetour">Date et Heure de Retour :</label><br>
+		<input type="datetime-local" id="dateHeureRetour" name="dateHeureRetour"><br>
+		
+		<label for="lieuLivraison">Lieu de Livraison :</label><br>
+		<input type="text" id="lieuLivraison" name="lieuLivraison"><br>
+		
+		<label for="lieuRetour">Lieu de Retour :</label><br>
+		<input type="text" id="lieuRetour" name="lieuRetour"><br>
+		
+		<label for="assuranceFranchise">Assurance Tous Risques avec Franchise :</label><br>
+		<input type="text" id="assuranceFranchise" name="assuranceFranchise"><br>
+		
+		<label for="kilometrageDepart">Kilométrage de Départ :</label><br>
+		<input type="text" id="kilometrageDepart" name="kilometrageDepart"><br>
+		
+		<label for="kilometrageRetour">Kilométrage de Retour :</label><br>
+		<input type="text" id="kilometrageRetour" name="kilometrageRetour"><br>
+		
+		<h2>Section Observation</h2>
+		
+		<label for="observations">Observations :</label><br>
+		<textarea id="observations" name="observations"></textarea><br>
+		
+		<input type="submit" value="calc">
+	</div>
+    </form>
+	<canvas id="canvas" class="popup-content"></canvas>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('form');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission
+
+       // Extract values from form fields
+var values = {};
+var inputs = form.querySelectorAll('input, textarea, select');
+inputs.forEach(function (input) {
+    if (input.type === 'checkbox') {
+        values[input.name] = input.checked;
+    } else if (input.type === 'select-one') {
+        // For select elements, get the selected option's value
+        values[input.name] = input.options[input.selectedIndex].value;
+    } else {
+        values[input.name] = input.value;
+    }
+});
+
+
+        // Draw on canvas
+        drawFormData(values);
+    });
+});
+
+function copyCanvasContent(sourceCanvas, targetCanvas, x, y, width, height) {
+    const sourceCtx = sourceCanvas.getContext('2d');
+    const targetCtx = targetCanvas.getContext('2d');
+    targetCtx.drawImage(sourceCanvas, 0, 0, sourceCanvas.width, sourceCanvas.height, x, y, width, height);
+}
+
+
+function drawFormData(values) {
+    // Create a new window
+    var popup = window.open('', '_blank', 'width=' + screen.width + ',height=' + screen.height);
+
+    // Append canvas element to the new window
+    var canvas = popup.document.createElement('canvas');
+    var ctx = canvas.getContext('2d');
+    popup.document.body.appendChild(canvas);
+
+    // Load background image
+    var img = new Image();
+    img.onload = function() {
+        // Set canvas size to A4 (210mm x 297mm)
+        canvas.width = img.width; 
+        canvas.height = img.height;
+
+        // Draw background image
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        // Copy the annotation canvas content
+        var annotationCanvas = document.getElementById('annotation-canvas');
+		copyCanvasContent(annotationCanvas, canvas, 1090, 1645, 1110, 810); // Adjust the coordinates as needed
+        
+        // Draw the logo
+        var logoImg = new Image();
+        logoImg.onload = function() {
+            ctx.drawImage(logoImg, 790, 10, 560, 300); // Draw the logo
+
+            // Set text styles
+            ctx.font = 'bold 36px Arial';
+            ctx.fillStyle = 'black'; // Change color to black for better readability
+
+            // Print values on canvas
+			// Print Contract Number
+			const formattedContractNumber = values['contract'].padStart(6, '0');
+            ctx.fillText(formattedContractNumber, 1140, 300);
+			//print date
+			const currentDate = new Date().toLocaleString();
+			ctx.fillText(currentDate, 440, 2900);
+
+            // personal infos
+            ctx.fillText(values['nom'], 440, 560);
+            ctx.fillText(values['prenom'], 440, 624);
+            ctx.fillText(values['dateNaissance'], 440, 708);
+            ctx.fillText(values['adresse'], 440, 781);
+            ctx.fillText(values['numeroID'], 440, 930);
+            ctx.fillText(values['passport'], 440, 1010);
+            ctx.fillText(values['dateLivraison'], 440, 1094);
+            ctx.fillText(values['nationalite'], 440, 1168);
+            ctx.fillText(values['permisConduire'], 440, 1241);
+            ctx.fillText(values['dateObtentionPermis'], 440, 1316);
+            ctx.fillText(values['numeroTelephone'], 440, 1390);
+
+            // Drawing Section Véhicule data on canvas
+            ctx.fillText(values['immatriculation'], 1550, 560);
+            ctx.fillText(values['marqueModele'], 1550, 624);
+            ctx.fillText(values['gaz'], 1550, 708);
+			ctx.fillText(values['carburant'] + '%', 1550, 790);
+            ctx.fillText(values['deuxiemePneu'] ? '✔️' : '❌', 1550, 863);
+            ctx.fillText(values['autorisation'] ? '✔️' : '❌', 1550, 930);
+            ctx.fillText(values['visiteTechnique'] ? '✔️' : '❌', 1550, 1010);
+
+            // Drawing Section Véhicule data on canvas
+            ctx.fillText(values['kit'] ? '✔️' : '❌', 2000, 790); // Check mark if checked, X if not
+            ctx.fillText(values['carteGrise'] ? '✔️' : '❌', 2000, 863); // Check mark if checked, X if not
+            ctx.fillText(values['vignette'] ? '✔️' : '❌', 2000, 930); // Check mark if checked, X if not
+            ctx.fillText(values['assurance'] ? '✔️' : '❌', 2000, 1010); // Check mark if checked, X if not
+
+            // Drawing Section Rencontre data on canvas
+            ctx.fillText(values['dateHeureDepart'], 1550, 1094);
+            ctx.fillText(values['dateHeureRetour'], 1550, 1168);
+            ctx.fillText(values['lieuLivraison'], 1550, 1241);
+            ctx.fillText(values['lieuRetour'], 1550, 1316);
+            ctx.fillText(values['assuranceFranchise'], 2000, 1390);
+            ctx.fillText(values['kilometrageDepart'], 1550, 1474);
+            ctx.fillText(values['kilometrageRetour'], 1550, 1541);
+            //observations part
+            ctx.fillText(values['observations'], 1210, 2625);
+        };
+        logoImg.src = 'logo.png'; // Path to your logo image file
+    };
+    img.src = 'CON-FRM.png'; // Path to your background image
+}
+
+	</script>
+</body>
+</html>
